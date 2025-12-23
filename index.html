@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>幸福教養｜模組1｜大人先穩定</title>
+
+  <meta name="theme-color" content="#ff8a3d" />
+  <meta name="description" content="幸福教養｜模組1｜大人先穩定：急救 × 錦囊 × 每日練功 × 種子花園" />
+
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icon-192.png" />
+  <link rel="apple-touch-icon" href="./icon-192.png" />
+
+  <link rel="stylesheet" href="./style.css" />
+  <script defer src="./app.js"></script>
+</head>
+
+<body>
+
+  <!-- ✅ 你貼的 main 內容：原封不動放這裡 -->
+  <!-- ========= 你的內容開始 ========= -->
+  <main class="app">
+    <header class="top">
+      <h1>幸福教養工具箱</h1>
+      <p class="sub">模組1｜大人先穩定：急救 × 錦囊 × 每日練功 × 種子花園</p>
+
+      <div class="bar">
+        <div class="chip" id="todayChip">今天：尚未練功</div>
+        <div class="chip">連續 <span id="streakText">0</span> 天</div>
+        <div class="chip">水滴 <span id="waterText">0</span></div>
+        <button class="chipBtn" id="btnResetToday">重設今日</button>
+      </div>
+
+      <div class="bar" style="margin-top:8px;">
+        <div class="chip">對象：<b id="ageLabelText">國小孩子</b></div>
+        <div class="agePills" id="ageChoices">
+          <button class="pill age" data-age="preschool">學前孩子</button>
+          <button class="pill age" data-age="primary">國小孩子</button>
+          <button class="pill age" data-age="teen">青少年</button>
+          <button class="pill age" data-age="adult">成人關係</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 1 現場急救 -->
+    <section class="card rescue">
+      <h2>1｜現場急救（30 秒）</h2>
+      <p class="hint">先緩一下，30 秒就好。</p>
+
+      <div class="big" id="timerText">00:30</div>
+      <div class="bubble" id="guideText">先讓臉放鬆。</div>
+
+      <div class="row">
+        <button class="btn" id="btnStart">先緩一下｜開始</button>
+        <button class="btn ghost" id="btnStop">先停一下</button>
+      </div>
+
+      <div class="row">
+        <button class="btn soft" id="btnDoneRescue">完成一次急救（+1 水滴）</button>
+        <button class="btn ghost" id="btnQuickPraise">給一句鼓勵</button>
+      </div>
+
+      <div class="bubble mini" id="praiseOut">（這裡會出現一句鼓勵）</div>
+      <p class="tiny">提示：吸 4 秒、吐 6 秒，跟著走就好。</p>
+    </section>
+
+    <!-- 2 錦囊妙計 -->
+    <section class="card tips">
+      <h2>2｜錦囊妙計</h2>
+
+      <div class="label">先選一個狀態（句子會更貼近現在）：</div>
+      <div class="choices" id="tipStateChoices">
+        <button class="pill" data-state="slow">🐢 先慢下來</button>
+        <button class="pill" data-state="clear">📋 把事情說清楚</button>
+        <button class="pill" data-state="stand">🧍 站好位置</button>
+        <button class="pill" data-state="soft">🌱 讓關係軟一點</button>
+      </div>
+      <div class="bubble mini" id="tipStateHint">（先選狀態，再抽句會更準）</div>
+
+      <div class="grid">
+        <div class="col">
+          <div class="labelRow">
+            <div class="label">心裡想的（先讓心裡穩定一點）</div>
+            <div class="labelBtns">
+              <button class="iconBtn" id="btnFavInnerAdd" title="把目前這句加入最愛">⭐ 收藏</button>
+              <button class="iconBtn" id="btnCopyInner" title="複製目前這句">📋 複製</button>
+            </div>
+          </div>
+
+          <button class="btn" id="btnInner">給一句（+1 水滴）</button>
+
+          <div class="bubbleRow">
+            <div class="bubble" id="innerOut">（會出現一句內在提示）</div>
+          </div>
+
+          <div class="miniBlock">
+            <div class="miniTitle">⭐ 最愛（最多 7 句）</div>
+            <div class="miniList" id="favInnerList"></div>
+
+            <div class="miniTitle">🕘 最近 3 句</div>
+            <div class="miniList" id="recentInnerList"></div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="labelRow">
+            <div class="label">說出口的（現在說得出口的話）</div>
+            <div class="labelBtns">
+              <button class="iconBtn" id="btnFavOuterAdd" title="把目前這句加入最愛">⭐ 收藏</button>
+              <button class="iconBtn" id="btnCopyOuter" title="複製目前這句">📋 複製</button>
+            </div>
+          </div>
+
+          <button class="btn" id="btnOuter">給一句（+1 水滴）</button>
+
+          <div class="bubbleRow">
+            <div class="bubble" id="outerOut">（會出現一句可說出口的話）</div>
+          </div>
+
+          <div class="miniBlock">
+            <div class="miniTitle">⭐ 最愛（最多 7 句）</div>
+            <div class="miniList" id="favOuterList"></div>
+
+            <div class="miniTitle">🕘 最近 3 句</div>
+            <div class="miniList" id="recentOuterList"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="miniStat">今日錦囊：<span id="tipCountText">0</span> 次</div>
+        <div class="miniStat">今日急救：<span id="rescueCountText">0</span> 次</div>
+      </div>
+
+      <p class="tiny">用法建議：先選狀態 → 抽一句「心裡想的」→ 再抽一句「說出口的」。喜歡的就收藏；要用就複製。</p>
+    </section>
+
+    <!-- 3 每天 1 分鐘 -->
+    <section class="card daily">
+      <h2>3｜每天 1 分鐘｜把下一句練回來</h2>
+      <p class="hint">不是修養，是讓關係不要更糟。</p>
+
+      <div class="big" id="dailyTimer">01:00</div>
+      <div class="bubble" id="dailyStep">先讓身體慢一點。</div>
+
+      <div class="label">這一刻，我比較需要的是：</div>
+      <div class="choices" id="stateChoices">
+        <button class="pill" data-state="slow">🐢 先慢下來</button>
+        <button class="pill" data-state="clear">📋 把事情說清楚</button>
+        <button class="pill" data-state="stand">🧍 站好位置</button>
+        <button class="pill" data-state="soft">🌱 讓關係軟一點</button>
+      </div>
+      <div class="bubble mini" id="stateHint">（點一個，系統會提醒你身體怎麼配合）</div>
+
+      <div class="row">
+        <button class="btn" id="btnDailyStart">開始 60 秒</button>
+        <button class="btn ghost" id="btnDailyStop">先停一下</button>
+      </div>
+
+      <div class="row">
+        <button class="btn soft" id="btnDailyDone">完成今天的練習</button>
+        <button class="btn ghost" id="btnDailyReset">重來一次</button>
+      </div>
+
+      <div class="resultCard" id="resultCard" hidden>
+        <div class="resultTitle">✅ 今天的下一句（選一個就好）</div>
+        <div class="resultMeta">
+          <span id="resultState">狀態：—</span>
+          <span id="resultBody">身體提醒：—</span>
+        </div>
+
+        <div class="resultChoices">
+          <button class="resultBtn" id="resultA">—</button>
+          <button class="resultBtn" id="resultB">—</button>
+        </div>
+
+        <div class="row">
+          <button class="btn" id="btnUseA">用這一句 A（複製）</button>
+          <button class="btn ghost" id="btnUseB">用這一句 B（複製）</button>
+        </div>
+
+        <div class="tiny">選一句後：會自動複製＋放到「說出口的」區（也會進最近，可收藏）。首次完成會 +3 水滴。</div>
+      </div>
+
+      <div class="bubble mini" id="dailyResult">（完成後，這裡會出現一句回饋）</div>
+    </section>
+
+    <!-- 4 種子花園 -->
+    <section class="card garden">
+      <h2>4｜種子花園（獎勵回饋）</h2>
+      <p class="hint">水滴累積起來，種子就會長大。看得到的進步，最能持續。</p>
+
+      <div class="gardenBox">
+        <div class="plant" id="plantIcon">🌰</div>
+        <div class="gardenInfo">
+          <div class="gardenLine">成長階段：<span id="stageText">種子</span></div>
+          <div class="gardenLine">距離下一階段還差：<span id="nextNeedText">5</span> 水滴</div>
+          <div class="meter">
+            <div class="meterFill" id="meterFill"></div>
+          </div>
+          <div class="tiny">階段：🌰→🌱→🌿→🌸→🍎（每 5 水滴一階）</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn ghost" id="btnGardenNote">給一張小卡</button>
+        <button class="btn danger" id="btnAllReset">全部清空</button>
+      </div>
+      <div class="bubble mini" id="gardenOut">（這裡會出現一句小卡）</div>
+    </section>
+
+    <!-- 複製備援小窗 -->
+    <div class="modal" id="copyModal" aria-hidden="true">
+      <div class="modalCard">
+        <div class="modalTitle">複製這一句</div>
+        <textarea id="copyBox" class="copyBox" rows="4" readonly></textarea>
+        <div class="row">
+          <button class="btn" id="btnSelectAll">全選</button>
+          <button class="btn ghost" id="btnCloseModal">關閉</button>
+        </div>
+        <div class="tiny">若手機無法一鍵複製，就用這個小窗：全選 → 複製。</div>
+      </div>
+    </div>
+
+    <footer class="foot">
+      <span class="tag">幸福教養｜模組1</span>
+      <span class="tag">版本：pen-m1-v1.8（年齡分流＋狀態錦囊）</span>
+    </footer>
+  </main>
+  <!-- ========= 你的內容結束 ========= -->
+
+  <script>
+    // ✅ 註冊 Service Worker（PWA 離線快取）
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./sw.js").catch(console.warn);
+      });
+    }
+  </script>
+</body>
+        </html>
